@@ -3,6 +3,7 @@ package com.project.quiz.controller;
 
 import com.project.quiz.model.Question;
 import com.project.quiz.model.QuestionWrapper;
+import com.project.quiz.model.Quiz;
 import com.project.quiz.model.Response;
 import com.project.quiz.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,6 @@ public class QuizController {
 
         return quizService.createQuiz(category,numQ,title);
     }
-
     @GetMapping("/get/{id}")
     public ResponseEntity<List<QuestionWrapper>> getQuizQuestions(@PathVariable Integer id){
         return quizService.getQuizQuestions(id);
@@ -33,5 +33,12 @@ public class QuizController {
     public ResponseEntity<Integer> submitQuiz(@PathVariable Integer id, @RequestBody List<Response> responses){
         return quizService.calculateResult(id,responses);
     }
-
+    @GetMapping("/all")
+    public ResponseEntity<List<Quiz>> getAllQuizzes() {
+        return quizService.getAll();
+    }
+    @DeleteMapping("/{id}")
+    public String deleteQuiz(@PathVariable Integer id){
+        return quizService.deleteQuiz(id);
+    }
 }

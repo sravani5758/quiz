@@ -67,4 +67,14 @@ public class QuizService {
         }
         return new ResponseEntity<>(right,HttpStatus.OK);
     }
+
+    public ResponseEntity<List<Quiz>> getAll() {
+        List<Quiz> quizzes = quizDao.findAll();
+        return new ResponseEntity<>(quizzes, HttpStatus.OK);
+    }
+
+    public String deleteQuiz(Integer id) {
+        quizDao.deleteById(id);
+        return "Deleted Successfully";
+    }
 }
